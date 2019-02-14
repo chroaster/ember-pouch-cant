@@ -1,57 +1,43 @@
 # ember-pouch-cant
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+Thank you for looking at this. I'm trying to use [ember-pouch](https://github.com/pouchdb-community/ember-pouch) with a project. Sync from the remote pouchdb works, but `findAll('name_of_db')` still returns nothing. 
 
-## Prerequisites
+This is a demo app to hopefully make it easier for you to help me understand what the problem is.
 
-You will need the following things properly installed on your computer.
+## Steps to replicate
+```
+create database in PouchDB called "posts_for_demo"
+  manually add a couple sample records…
+  {
+    "_id": "vegan-brownie-recipe",
+    "title": "Vegan Brownie Recipe",
+    "author": "Amber"
+  }
 
-* [Git](https://git-scm.com/)
-* [Node.js](https://nodejs.org/) (with npm)
-* [Ember CLI](https://ember-cli.com/)
-* [Google Chrome](https://google.com/chrome/)
+  {
+    "_id": "friday-blood-drive",
+    "title": "Friday Blood Drive",
+    "author": "Bert"
+  }
 
-## Installation
-
-* `git clone <repository-url>` this repository
-* `cd ember-pouch-cant`
-* `npm install`
-
-## Running / Development
-
-* `ember serve`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
-* Visit your tests at [http://localhost:4200/tests](http://localhost:4200/tests).
-
-### Code Generators
-
-Make use of the many generators for code, try `ember help generate` for more details
-
-### Running Tests
-
-* `ember test`
-* `ember test --server`
-
-### Linting
-
-* `npm run lint:hbs`
-* `npm run lint:js`
-* `npm run lint:js -- --fix`
-
-### Building
-
-* `ember build` (development)
-* `ember build --environment production` (production)
-
-### Deploying
-
-Specify what it takes to deploy your app.
-
-## Further Reading / Useful Links
-
-* [ember.js](https://emberjs.com/)
-* [ember-cli](https://ember-cli.com/)
-* Development Browser Extensions
-  * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
-  * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
+ember new ember-pouch-cant
+cd ember-pouch-cant
+ember install ember-pouch
+ember install pouchdb-debug
+ember install ember-auto-import
+ember g pouch-adapter application
+  in app/adapters/application.js…
+    enable debug mode for pouchdb
+    add local and remote db names
+ember g pouch-model post
+  in app/models/post.js…
+    add title and author attributes
+ember g route index
+  in app/routes/index.js…
+    have model return this.store.findAll('post');
+  in app/templates/index.hbs…
+    attempt to display results from model, e.g., the #each above
+remove ember welcome page from application.hbs
+npm install
+ember s
+```
