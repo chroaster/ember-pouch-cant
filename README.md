@@ -11,7 +11,7 @@ This is a demo app to hopefully make it easier for you to help me understand wha
 * `npm install`
 * `ember serve`
 
-## Steps to replicate from scratch 
+## Steps to reproduce from scratch 
 ```
 create database in PouchDB called "posts_for_demo"
   manually add a couple sample records…
