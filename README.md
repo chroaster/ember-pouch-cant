@@ -4,7 +4,14 @@ Thank you for looking at this. I'm trying to use [ember-pouch](https://github.co
 
 This is a demo app to hopefully make it easier for you to help me understand what the problem is.
 
-## Steps to replicate
+## Try it on your system
+
+* `git clone git@github.com:chroaster/ember-pouch-cant.git`
+* `cd ember-pouch-cant`
+* `npm install`
+* `ember serve`
+
+## Steps to replicate from scratch 
 ```
 create database in PouchDB called "posts_for_demo"
   manually add a couple sample records…
