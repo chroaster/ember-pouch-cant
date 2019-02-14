@@ -1,0 +1,56 @@
+<h2>Why is the list below not populating even though the records are succesfully synced from remote pouchdb?</h2>
+<div>
+  <p>↓↓↓↓ list ↓↓↓↓</p>
+  {{#each model as |post|}}
+    <li>{{post.title}} by {{post.author}}</li>
+  {{/each}}
+  <p>↑↑↑↑ list ↑↑↑↑</p>
+</div>
+
+<div>
+  <h2>Records in browser storage indicates local pouch successfully synced with remote PouchDB…</h2>
+</div>
+
+<div>
+  <img src="./storage-screenshot.png" alt="storage screenshot">
+</div>
+
+<div>
+  <h2>Steps to recreate</h2>
+  <pre>
+    create database in PouchDB called "posts_for_demo"
+      manually add a couple sample records…
+      {
+        "_id": "vegan-brownie-recipe",
+        "title": "Vegan Brownie Recipe",
+        "author": "Amber"
+      }
+
+      {
+        "_id": "friday-blood-drive",
+        "title": "Friday Blood Drive",
+        "author": "Bert"
+      }
+
+    ember new ember-pouch-cant
+    cd ember-pouch-cant
+    ember install ember-pouch
+    ember install pouchdb-debug
+    ember install ember-auto-import
+    ember g pouch-adapter application
+      in app/adapters/application.js…
+        enable debug mode for pouchdb
+        add local and remote db names
+    ember g pouch-model post
+      in app/models/post.js…
+        add title and author attributes
+    ember g route index
+      in app/routes/index.js…
+        have model return this.store.findAll('post');
+      in app/templates/index.hbs…
+        attempt to display results from model, e.g., the #each above
+    remove ember welcome page from application.hbs
+    npm install
+    ember s
+  </pre>
+</div>
